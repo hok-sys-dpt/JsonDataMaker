@@ -43,8 +43,6 @@ namespace JsonDataMaker.Controller
 
             foreach (GW1002ResponseJson item in data1)
             {
-                var selectedData = data2.Cast<GW1002ResponseList>().Where(d => d.FileId == item.FileNo);
-
                 item.ResponseMessageData.WisResponseSystemInfo = new WisResponseSystemInfo()
                 {
                     version = "",
@@ -53,26 +51,22 @@ namespace JsonDataMaker.Controller
                     resultCode = "000000",
                     resultDetail = null
                 };
-                // item.ResponseMessageData.BizIbRiyoukozaShokai = new BizIbRiyoukozaShokai(
-                // {
-                //     foreach(RiyoKozaJoho item in selectedData)
-                //     {
-                //         RiyoKozaJoho[i] = item;
-                //         i++
-                //     }                    
-                // }
-                // item.ResponseMessageData.BizIbRiyoukozaShokai.RiyoKozaJoho = selectedData.Select(s => s.RiyoKozaJoho).ToArray();
+                item.ResponseMessageData.BizIbRiyoukozaShokai = new BizIbRiyoukozaShokai() { };
+                var selectedData = data2.Cast<GW1002ResponseList>()
+                                    .Where(d => d.FileId == item.FileNo)
+                                    .Select(s => s.RiyoKozaJoho)
+                                    .ToArray();
+
+                var c = 0;
+                foreach (RiyoKozaJoho koza in selectedData)
+                {
+                    item.ResponseMessageData.BizIbRiyoukozaShokai.RiyoKozaJoho[c] = koza;
+                    c++;
+                }
+
                 _jsonFileWriter.New(item.ResponseMessageData, item.FileNo, apiNo, request, outputpath);
                 i++;
             }
-
-            // var data2 = _readCsv.Fetcher<GW1002ResponseList, GW1002ResponseListMapper>(csv2);
-            // Console.WriteLine(JsonConvert.SerializeObject(selectedData, Formatting.Indented));
-
-            // item.ResponseMessageData.BizIbRiyoukozaShokai = new BankVision.WebAPI.Models.GW1002.Response.ResponseMessageData.BizIbRiyoukozaShokai()
-            // {
-            //     RiyoKozaJoho = selectedData.Select(s => s.RiyoKozaJoho).ToArray()
-            // };
             Console.WriteLine($"\n {i}件のファイルを出力しました");
         }
     }
