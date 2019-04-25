@@ -6,7 +6,7 @@
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.4.3" />
     <PackageReference Include="CsvHelper" Version="12.1.2" />
-    <PackageReference Include="Hox.Biz.BankVision.WebAPI.Models" Version="1.0.1-CI-20190418-075701" />
+    <PackageReference Include="Hox.Biz.BankVision.WebAPI.Models" Version="1.0.1-CI-20190423-093159" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="4.5.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
   </ItemGroup>

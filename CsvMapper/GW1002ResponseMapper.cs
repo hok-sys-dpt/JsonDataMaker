@@ -10,6 +10,7 @@ namespace JsonDataMaker.CsvMapper
             Map(x => x.FileNo).Name("FileId");
             Map(x => x.ResponseMessageData.BizIbRiyoukozaShokai.shoribi).Name("shoribi");
             Map(x => x.ResponseMessageData.BizIbRiyoukozaShokai.shoriJikoku).Name("shoriJikoku");
+            Map(x => x.ResponseMessageData.BizIbRiyoukozaShokai.otoKensu).Name("otoKensu");
             Map(x => x.ResponseMessageData.BizIbRiyoukozaShokai.KurikaeshiSeigyo.jiMeisaiariHyoji).Name("jiMeisaiariHyoji");
             Map(x => x.ResponseMessageData.BizIbRiyoukozaShokai.KurikaeshiSeigyo.JiMeisaiKey.tsugiTemban).Name("tsugiTemban");
             Map(x => x.ResponseMessageData.BizIbRiyoukozaShokai.KurikaeshiSeigyo.JiMeisaiKey.tsugiKamokuCode).Name("tsugiKamokuCode");
