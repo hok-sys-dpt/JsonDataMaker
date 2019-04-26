@@ -4,7 +4,7 @@ using CsvHelper;
 
 namespace JsonDataMaker
 {
-    public class ReadCsv
+    public class CsvFetcher
     {
         public IEnumerable<T> Fetcher<T, M>(CsvReader csv) where M: CsvHelper.Configuration.ClassMap<T>
         {

@@ -16,14 +16,14 @@ namespace JsonDataMaker.Logic
 {
     public class GW1002ResponseLogic : IGWLogic
     {
-        private readonly ReadCsv _readCsv;
+        private readonly CsvFetcher _readCsv;
         private readonly JsonFileWriter _jsonFileWriter;
         private const string apiNo = "GW1002";
         private const string request = "request";
         private const string response = "response";
         private const int maxItemCount = 50;
 
-        public GW1002ResponseLogic(ReadCsv readCsv, JsonFileWriter jsonFileWriter)
+        public GW1002ResponseLogic(CsvFetcher readCsv, JsonFileWriter jsonFileWriter)
         {
             _readCsv = readCsv;
             _jsonFileWriter = jsonFileWriter;
@@ -52,7 +52,7 @@ namespace JsonDataMaker.Logic
                     resultCode = "000000",
                     resultDetail = null
                 };
-                // item.ResponseMessageData.BizIbRiyoukozaShokai = new BizIbRiyoukozaShokai() { };
+                
                 var selectedData = data2.Cast<GW1002ResponseList>()
                                     .Where(d => d.FileId == item.FileNo)
                                     .Select(s => s.RiyoKozaJoho)

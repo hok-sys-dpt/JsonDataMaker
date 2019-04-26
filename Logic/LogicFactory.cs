@@ -6,7 +6,13 @@ namespace JsonDataMaker.Logic
     {
         private const string request = "request";
         private const string response = "response";
-        public IGWLogic CreateLogic(string gWnumber, string reqOrRes, ReadCsv csv, JsonFileWriter jf)
+        
+        ///<summary>
+        /// API Logic を作成
+        ///</summary>
+        ///<param name="gWnumber">GW番号</param>
+        ///<param name="reqOrRes">request or response</param>
+        public IGWLogic CreateLogic(string gWnumber, string reqOrRes, CsvFetcher csv, JsonFileWriter jf)
         {
             switch (gWnumber)
             {

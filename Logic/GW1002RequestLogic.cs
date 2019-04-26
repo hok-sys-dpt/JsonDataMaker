@@ -13,13 +13,13 @@ namespace JsonDataMaker.Logic
 {
     public class GW1002RequestLogic : IGWLogic
     {
-        private readonly ReadCsv _readCsv;
+        private readonly CsvFetcher _readCsv;
         private readonly JsonFileWriter _jsonFileWriter;
         private const string apiNo = "GW1002";
         private const string request = "request";
         private const string response = "response";
 
-        public GW1002RequestLogic(ReadCsv readCsv, JsonFileWriter jsonFileWriter)
+        public GW1002RequestLogic(CsvFetcher readCsv, JsonFileWriter jsonFileWriter)
         {
             _readCsv = readCsv;
             _jsonFileWriter = jsonFileWriter;
