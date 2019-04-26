@@ -6,20 +6,20 @@ using CsvHelper;
 using JsonDataMaker.CsvMapper;
 using Newtonsoft.Json;
 using BankVision.WebAPI.Models.Common;
-using JsonDataMaker.Models.GW0008.Request;
-using JsonDataMaker.Models.GW0008.Response;
+using JsonDataMaker.Models.GW1002.Request;
+using JsonDataMaker.Models.GW1002.Response;
 
-namespace JsonDataMaker.Controller
+namespace JsonDataMaker.Logic
 {
-    public class GW0008RequestLogic : IGWLogic
+    public class GW1002RequestLogic : IGWLogic
     {
         private readonly ReadCsv _readCsv;
         private readonly JsonFileWriter _jsonFileWriter;
-        private const string apiNo = "GW0008";
+        private const string apiNo = "GW1002";
         private const string request = "request";
         private const string response = "response";
 
-        public GW0008RequestLogic(ReadCsv readCsv, JsonFileWriter jsonFileWriter)
+        public GW1002RequestLogic(ReadCsv readCsv, JsonFileWriter jsonFileWriter)
         {
             _readCsv = readCsv;
             _jsonFileWriter = jsonFileWriter;
@@ -28,8 +28,8 @@ namespace JsonDataMaker.Controller
         public void CreateData(string outputpath, CsvReader csv)
         {
             int i = 0;
-            var data = _readCsv.Fetcher<GW0008RequestJson, GW0008RequestMapper>(csv);
-            foreach (GW0008RequestJson item in data)
+            var data = _readCsv.Fetcher<GW1002RequestJson, GW1002RequestMapper>(csv);
+            foreach (GW1002RequestJson item in data)
             {
                 item.RequestMessageData.WisRequestSystemInfo = new WisRequestSystemInfo()
                 {

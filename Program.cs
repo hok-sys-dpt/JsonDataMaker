@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using CommandLine;
 using CsvHelper;
-using JsonDataMaker.Controller;
+using JsonDataMaker.Logic;
 
 namespace JsonDataMaker
 {

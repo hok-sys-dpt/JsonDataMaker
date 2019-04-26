@@ -1,6 +1,6 @@
 using CsvHelper;
 
-namespace JsonDataMaker.Controller
+namespace JsonDataMaker.Logic
 {
     public interface IGWLogic
     {

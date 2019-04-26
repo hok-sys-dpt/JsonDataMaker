@@ -1,6 +1,6 @@
 using System;
 
-namespace JsonDataMaker.Controller
+namespace JsonDataMaker.Logic
 {
     public class LogicFactory
     {

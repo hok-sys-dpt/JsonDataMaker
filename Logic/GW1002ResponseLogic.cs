@@ -12,7 +12,7 @@ using JsonDataMaker.Models.GW1012.Response;
 using BankVision.WebAPI.Models.GW1002.Response;
 using System.Linq;
 
-namespace JsonDataMaker.Controller
+namespace JsonDataMaker.Logic
 {
     public class GW1002ResponseLogic : IGWLogic
     {
@@ -21,6 +21,7 @@ namespace JsonDataMaker.Controller
         private const string apiNo = "GW1002";
         private const string request = "request";
         private const string response = "response";
+        private const int maxItemCount = 50;
 
         public GW1002ResponseLogic(ReadCsv readCsv, JsonFileWriter jsonFileWriter)
         {
@@ -43,7 +44,7 @@ namespace JsonDataMaker.Controller
 
             foreach (GW1002ResponseJson item in data1)
             {
-                item.ResponseMessageData.WisResponseSystemInfo = new WisResponseSystemInfo()
+                item.ResponseMessageData.WisResponseSystemInfo = new WisResponseSystemInfo
                 {
                     version = "",
                     transactionId = "51-1_1goSKY002KjZ",
@@ -51,7 +52,7 @@ namespace JsonDataMaker.Controller
                     resultCode = "000000",
                     resultDetail = null
                 };
-                item.ResponseMessageData.BizIbRiyoukozaShokai = new BizIbRiyoukozaShokai() { };
+                // item.ResponseMessageData.BizIbRiyoukozaShokai = new BizIbRiyoukozaShokai() { };
                 var selectedData = data2.Cast<GW1002ResponseList>()
                                     .Where(d => d.FileId == item.FileNo)
                                     .Select(s => s.RiyoKozaJoho)
@@ -62,6 +63,27 @@ namespace JsonDataMaker.Controller
                 {
                     item.ResponseMessageData.BizIbRiyoukozaShokai.RiyoKozaJoho[c] = koza;
                     c++;
+                }
+
+                for( var a = c; a < maxItemCount; a++)
+                {
+                    item.ResponseMessageData.BizIbRiyoukozaShokai.RiyoKozaJoho[a] = new RiyoKozaJoho
+                    {
+                        cifBango = 0,
+                        daihyoKozaHyoji = 0,
+                        kamokuCode = 0,
+                        kamokuCodeUchiwake = 0,
+                        kozaMemo = "",
+                        kozabango = 0,
+                        kozameigiKana = "",
+                        kozameigiKanji = "",
+                        orgId = 0,
+                        sakuinyoKozameigiKana = "",
+                        temban = 0,
+                        tenmeiKana = "",
+                        tenmeiKanji = "",
+                        tsukaCode = ""
+                    };
                 }
 
                 _jsonFileWriter.New(item.ResponseMessageData, item.FileNo, apiNo, request, outputpath);

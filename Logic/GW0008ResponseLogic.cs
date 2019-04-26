@@ -9,7 +9,7 @@ using BankVision.WebAPI.Models.Common;
 using JsonDataMaker.Models.GW0008.Request;
 using JsonDataMaker.Models.GW0008.Response;
 
-namespace JsonDataMaker.Controller
+namespace JsonDataMaker.Logic
 {
     public class GW0008ResponseLogic : IGWLogic
     {
