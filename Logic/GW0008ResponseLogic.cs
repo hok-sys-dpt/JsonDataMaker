@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using BankVision.WebAPI.Models.Common;
 using JsonDataMaker.Models.GW0008.Request;
 using JsonDataMaker.Models.GW0008.Response;
+using jsondatamaker.Models;
 
 namespace JsonDataMaker.Logic
 {
@@ -31,15 +32,12 @@ namespace JsonDataMaker.Logic
             var data = _readCsv.Fetcher<GW0008ResponseJson, GW0008ResponseMapper>(csv);
             foreach (GW0008ResponseJson item in data)
             {
-                item.ResponseMessageData.WisResponseSystemInfo = new WisResponseSystemInfo()
-                {
-                    version = "",
-                    transactionId = "51-1_1goSKY002KjZ",
-                    result = 0,
-                    resultCode = "000000",
-                    resultDetail = null
-                };
+                // WisResponseSystemInfoクラスの生成
+                item.ResponseMessageData.WisResponseSystemInfo = new WisResponseSystemInfoValue();
+
+                // jsonデータ作成
                 _jsonFileWriter.New(item.ResponseMessageData, item.FileNo, apiNo, response, outputpath);
+                
                 i++;
             }
             Console.WriteLine($"\n {i}件のファイルを出力しました");

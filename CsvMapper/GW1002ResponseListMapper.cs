@@ -1,6 +1,6 @@
 using CsvHelper;
 using BankVision.WebAPI.Models.GW1002.Response;
-using JsonDataMaker.Models.GW1012.Response;
+using JsonDataMaker.Models.GW1002.Response;
 
 namespace JsonDataMaker.CsvMapper
 {

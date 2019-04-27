@@ -1,16 +1,12 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using CsvHelper;
 using JsonDataMaker.CsvMapper;
 using Newtonsoft.Json;
-using BankVision.WebAPI.Models.Common;
-using JsonDataMaker.Models.GW1002.Request;
 using JsonDataMaker.Models.GW1002.Response;
-using JsonDataMaker.Models.GW1012.Response;
-using BankVision.WebAPI.Models.GW1002.Response;
 using System.Linq;
+using jsondatamaker.Models;
+using jsondatamaker.Models.GW1002.Response;
+using BankVision.WebAPI.Models.GW1002.Response;
 
 namespace JsonDataMaker.Logic
 {
@@ -32,32 +28,28 @@ namespace JsonDataMaker.Logic
         public void CreateData(string outputpath, CsvReader csv)
         {
             throw new NotImplementedException();
-
         }
 
         public void CreateListData(string outputpath, CsvReader csv1, CsvReader csv2)
         {
             int i = 0;
 
+            // CsvをFetch
             var data1 = _readCsv.Fetcher<GW1002ResponseJson, GW1002ResponseMapper>(csv1);
             var data2 = _readCsv.Fetcher<GW1002ResponseList, GW1002ResponseListMapper>(csv2);
 
             foreach (GW1002ResponseJson item in data1)
             {
-                item.ResponseMessageData.WisResponseSystemInfo = new WisResponseSystemInfo
-                {
-                    version = "",
-                    transactionId = "51-1_1goSKY002KjZ",
-                    result = 0,
-                    resultCode = "000000",
-                    resultDetail = null
-                };
-                
+                // WisResponseSystemInfoクラスの生成
+                item.ResponseMessageData.WisResponseSystemInfo = new WisResponseSystemInfoValue();
+
+                // 基本ファイルのFileIdと一致する明細ファイルのレコードを抽出
                 var selectedData = data2.Cast<GW1002ResponseList>()
                                     .Where(d => d.FileId == item.FileNo)
                                     .Select(s => s.RiyoKozaJoho)
                                     .ToArray();
-
+                
+                // 利用口座情報に抽出データを設定
                 var c = 0;
                 foreach (RiyoKozaJoho koza in selectedData)
                 {
@@ -65,28 +57,15 @@ namespace JsonDataMaker.Logic
                     c++;
                 }
 
-                for( var a = c; a < maxItemCount; a++)
+                // 空文字で配列を埋める
+                for (var a = c - 1; a < maxItemCount; a++)
                 {
-                    item.ResponseMessageData.BizIbRiyoukozaShokai.RiyoKozaJoho[a] = new RiyoKozaJoho
-                    {
-                        cifBango = 0,
-                        daihyoKozaHyoji = 0,
-                        kamokuCode = 0,
-                        kamokuCodeUchiwake = 0,
-                        kozaMemo = "",
-                        kozabango = 0,
-                        kozameigiKana = "",
-                        kozameigiKanji = "",
-                        orgId = 0,
-                        sakuinyoKozameigiKana = "",
-                        temban = 0,
-                        tenmeiKana = "",
-                        tenmeiKanji = "",
-                        tsukaCode = ""
-                    };
+                    item.ResponseMessageData.BizIbRiyoukozaShokai.RiyoKozaJoho[a] = new RiyoKozaJohoEmpty();             
                 }
-
-                _jsonFileWriter.New(item.ResponseMessageData, item.FileNo, apiNo, request, outputpath);
+                
+                // jsonファイル作成
+                _jsonFileWriter.New(item.ResponseMessageData, item.FileNo, apiNo, response, outputpath);
+                
                 i++;
             }
             Console.WriteLine($"\n {i}件のファイルを出力しました");

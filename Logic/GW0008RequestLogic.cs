@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using BankVision.WebAPI.Models.Common;
 using JsonDataMaker.Models.GW0008.Request;
 using JsonDataMaker.Models.GW0008.Response;
+using jsondatamaker.Models;
 
 namespace JsonDataMaker.Logic
 {
@@ -28,18 +29,16 @@ namespace JsonDataMaker.Logic
         public void CreateData(string outputpath, CsvReader csv)
         {
             int i = 0;
+
+            // CsvデータをFetch
             var data = _readCsv.Fetcher<GW0008RequestJson, GW0008RequestMapper>(csv);
+            
             foreach (GW0008RequestJson item in data)
             {
-                item.RequestMessageData.WisRequestSystemInfo = new WisRequestSystemInfo()
-                {
-                    version = "",
-                    clientId = "CB02",
-                    clientTraceId = "6b4f47a4-3e5d-4157-a8a8-a7400b877af9",
-                    transactionId = "",
-                    requestType = 0,
-                    clientKey = "E1234CC5-6789-0AB1-2345-67890AC1F23"
-                };
+                // WisRequestSystemInfoクラスの生成
+                item.RequestMessageData.WisRequestSystemInfo = new WisRequestSystemInfoValue();
+
+                // jsonデータ作成
                 _jsonFileWriter.New(item.RequestMessageData, item.FileNo, apiNo, request, outputpath);
                 i++;
             }

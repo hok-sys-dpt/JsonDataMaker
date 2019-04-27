@@ -1,6 +1,6 @@
 using BankVision.WebAPI.Models.GW1002.Response;
 
-namespace JsonDataMaker.Models.GW1012.Response
+namespace JsonDataMaker.Models.GW1002.Response
 {
     public class GW1002ResponseList
     {
