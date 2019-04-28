@@ -5,8 +5,7 @@ namespace JsonDataMaker.Logic
     public class LogicFactory
     {
         private const string request = "request";
-        private const string response = "response";
-        
+
         ///<summary>
         /// API Logic を作成
         ///</summary>
@@ -27,7 +26,7 @@ namespace JsonDataMaker.Logic
                         if (reqOrRes == request)
                             return new GW1002RequestLogic(csv, jf);
                         return new GW1002ResponseLogic(csv, jf);
-                }
+                    }
                 default:
                     throw new ArgumentException("\n対象のファクトリがありませんでした");
             }

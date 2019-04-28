@@ -25,7 +25,7 @@ namespace JsonDataMaker
                     var reqOrRes = o.reqOrRes.ToLower();
 
                     if (reqOrRes != response && reqOrRes != request)
-                        throw new Exception("\n RequestかResponseをして下さい");
+                        throw new InvalidDataException("\n RequestかResponseをして下さい");
 
                     // CsvReader生成
                     Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);

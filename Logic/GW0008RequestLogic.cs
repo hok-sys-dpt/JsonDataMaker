@@ -18,7 +18,6 @@ namespace JsonDataMaker.Logic
         private readonly JsonFileWriter _jsonFileWriter;
         private const string apiNo = "GW0008";
         private const string request = "request";
-        private const string response = "response";
 
         public GW0008RequestLogic(CsvFetcher readCsv, JsonFileWriter jsonFileWriter)
         {

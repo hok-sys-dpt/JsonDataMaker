@@ -15,9 +15,8 @@ namespace JsonDataMaker.Logic
         private readonly CsvFetcher _readCsv;
         private readonly JsonFileWriter _jsonFileWriter;
         private const string apiNo = "GW1002";
-        private const string request = "request";
         private const string response = "response";
-        private const int maxItemCount = 50;
+        private const int MaxItemCount = 50;
 
         public GW1002ResponseLogic(CsvFetcher readCsv, JsonFileWriter jsonFileWriter)
         {
@@ -44,11 +43,10 @@ namespace JsonDataMaker.Logic
                 item.ResponseMessageData.WisResponseSystemInfo = new WisResponseSystemInfoValue();
 
                 // 基本ファイルのFileIdと一致する明細ファイルのレコードを抽出
-                var selectedData = data2.Cast<GW1002ResponseList>()
-                                    .Where(d => d.FileId == item.FileNo)
-                                    .Select(s => s.RiyoKozaJoho)
-                                    .ToArray();
-                
+                var selectedData = data2.Where(d => d.FileId == item.FileNo)
+                                        .Select(s => s.RiyoKozaJoho)
+                                        .ToArray();
+
                 // 利用口座情報に抽出データを設定
                 var c = 0;
                 foreach (RiyoKozaJoho koza in selectedData)
@@ -58,14 +56,14 @@ namespace JsonDataMaker.Logic
                 }
 
                 // 空文字で配列を埋める
-                for (var a = c - 1; a < maxItemCount; a++)
+                for (var a = c - 1; a < MaxItemCount; a++)
                 {
-                    item.ResponseMessageData.BizIbRiyoukozaShokai.RiyoKozaJoho[a] = new RiyoKozaJohoEmpty();             
+                    item.ResponseMessageData.BizIbRiyoukozaShokai.RiyoKozaJoho[a] = new RiyoKozaJohoEmpty();
                 }
-                
+
                 // jsonファイル作成
                 _jsonFileWriter.New(item.ResponseMessageData, item.FileNo, apiNo, response, outputpath);
-                
+
                 i++;
             }
             Console.WriteLine($"\n {i}件のファイルを出力しました");
