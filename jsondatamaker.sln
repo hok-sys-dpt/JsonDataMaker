@@ -5,7 +5,13 @@ VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "jsondatamaker", "JsonDataMaker\jsondatamaker.csproj", "{F5F7983D-14B1-4404-A355-8788BCE99C5C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonDataMaker.Tests", "JsonDataMaker.Tests\JsonDataMaker.Tests.csproj", "{8FB172D6-65A6-419D-BB5F-C72B8732FF98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonDataMaker.Core", "JsonDataMaker.Core\JsonDataMaker.Core\JsonDataMaker.Core.csproj", "{A9BBDABD-9CAC-45DA-8734-2425DFF9920E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7DD836E2-598A-4C31-82C3-82397A71F7B9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonDataMaker.Core.Tests", "Tests\JsonDataMaker.Core.Tests\JsonDataMaker.Core.Tests.csproj", "{0E8CA273-3C90-4590-8046-4D1D178B6842}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonDataMaker.Tests", "Tests\JsonDataMaker.Tests\JsonDataMaker.Tests.csproj", "{9D1E237E-C832-4C4D-9FE0-3B05D7DEEDAC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,13 +23,25 @@ Global
 		{F5F7983D-14B1-4404-A355-8788BCE99C5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5F7983D-14B1-4404-A355-8788BCE99C5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5F7983D-14B1-4404-A355-8788BCE99C5C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8FB172D6-65A6-419D-BB5F-C72B8732FF98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8FB172D6-65A6-419D-BB5F-C72B8732FF98}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8FB172D6-65A6-419D-BB5F-C72B8732FF98}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8FB172D6-65A6-419D-BB5F-C72B8732FF98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9BBDABD-9CAC-45DA-8734-2425DFF9920E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9BBDABD-9CAC-45DA-8734-2425DFF9920E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9BBDABD-9CAC-45DA-8734-2425DFF9920E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9BBDABD-9CAC-45DA-8734-2425DFF9920E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E8CA273-3C90-4590-8046-4D1D178B6842}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E8CA273-3C90-4590-8046-4D1D178B6842}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E8CA273-3C90-4590-8046-4D1D178B6842}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E8CA273-3C90-4590-8046-4D1D178B6842}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D1E237E-C832-4C4D-9FE0-3B05D7DEEDAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D1E237E-C832-4C4D-9FE0-3B05D7DEEDAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D1E237E-C832-4C4D-9FE0-3B05D7DEEDAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D1E237E-C832-4C4D-9FE0-3B05D7DEEDAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0E8CA273-3C90-4590-8046-4D1D178B6842} = {7DD836E2-598A-4C31-82C3-82397A71F7B9}
+		{9D1E237E-C832-4C4D-9FE0-3B05D7DEEDAC} = {7DD836E2-598A-4C31-82C3-82397A71F7B9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {532D9BBD-0679-4F44-AC0C-5AC309C423F0}
