@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "jsondatamaker", "jsondatamaker.csproj", "{F5F7983D-14B1-4404-A355-8788BCE99C5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "jsondatamaker", "JsonDataMaker\jsondatamaker.csproj", "{F5F7983D-14B1-4404-A355-8788BCE99C5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
