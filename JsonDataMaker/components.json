@@ -1,0 +1,50 @@
+{
+  "defaultAssembly": "JsonDataMaker",
+  "components": [
+    {
+      "type": "JsonDataMaker.CsvFetcher, JsonDataMaker"
+    },
+    {
+      "type": "JsonDataMaker.JsonFileWriter, JsonDataMaker"
+    },
+    {
+      "type": "JsonDataMaker.Logic.LogicFactory, JsonDataMaker"
+    },
+    {
+      "type": "JsonDataMaker.Logic.GW0008RequestLogic, JsonDataMaker",
+      "services": [
+        {
+          "type": "JsonDataMaker.Logic.IGWLogic, JsonDataMaker",
+          "key": "GW0008:request"
+        }
+      ]
+    },
+    {
+      "type": "JsonDataMaker.Logic.GW0008ResponseLogic, JsonDataMaker",
+      "services": [
+        {
+          "type": "JsonDataMaker.Logic.IGWLogic, JsonDataMaker",
+          "key": "GW0008:response"
+        }
+      ]
+    },
+    {
+      "type": "JsonDataMaker.Logic.GW1002RequestLogic, JsonDataMaker",
+      "services": [
+        {
+          "type": "JsonDataMaker.Logic.IGWLogic, JsonDataMaker",
+          "key": "GW1002:request"
+        }
+      ]
+    },
+    {
+      "type": "JsonDataMaker.Logic.GW1002ResponseLogic, JsonDataMaker",
+      "services": [
+        {
+          "type": "JsonDataMaker.Logic.IGWLogic, JsonDataMaker",
+          "key": "GW1002:response"
+        }
+      ]
+    }
+  ]
+}
