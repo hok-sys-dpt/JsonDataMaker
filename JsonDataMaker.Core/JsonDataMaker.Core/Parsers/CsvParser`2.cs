@@ -8,7 +8,7 @@ using CsvHelper.Configuration;
 
 namespace JsonDataMaker.Core.Parsers
 {
-    public class CsvParser<T, M> : ICsvParser
+    public class CsvParser<T, M> : ICsvParser<T>
         where M : ClassMap<T>
     {
         public IEnumerable<T> Parse(Stream stream)
@@ -16,9 +16,17 @@ namespace JsonDataMaker.Core.Parsers
             return OnParse(stream);
         }
 
-        protected virtual IEnumerable<T> OnParse(Stream stream)
+
+        public IEnumerable<T> Parse(params Stream[] streams)
         {
-            using (var reader = new StreamReader(stream))
+            return OnParse(streams);
+        }
+
+        protected virtual IEnumerable<T> OnParse(params Stream[] streams)
+        {
+            if (streams.Length != 1) { throw new ArgumentException(nameof(streams)); }
+
+            using (var reader = new StreamReader(streams[0]))
             using (var csvReader = new CsvReader(reader))
             {
                 csvReader.Configuration.RegisterClassMap<M>();
