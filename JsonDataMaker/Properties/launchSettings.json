@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "jsondatamaker": {
+      "commandName": "Project"
+    },
+    "jsondatamaker:Development": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "EnvironmentName": "Development"
+      }
+    }
+  }
+}

@@ -1,9 +1,14 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Text;
+using Autofac;
+using Autofac.Configuration;
 using CommandLine;
 using CsvHelper;
+using Hox.Biz.BankAccount.Domain;
 using JsonDataMaker.Logic;
+using Microsoft.Extensions.Configuration;
 
 namespace JsonDataMaker
 {
@@ -11,10 +16,35 @@ namespace JsonDataMaker
     {
         private static string response = "response";
         private static string request = "request";
-        private static LogicFactory _logicFactory = new LogicFactory();
+
+        internal static IContainer Container
+        {
+            get; private set;
+        }
 
         static void Main(string[] args)
         {
+            var environmentName = Environment.GetEnvironmentVariable("EnvironmentName") ?? "Production";
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location))
+                .AddJsonFile("appsettings.json", optional: true)
+                .AddJsonFile($"appsettings.{environmentName}.json", optional: true)
+                .AddJsonFile("components.json", optional: true)
+                .AddJsonFile($"components.{environmentName}.json", optional: true)
+                .AddEnvironmentVariables()
+                .AddCommandLine(args)
+                .Build();
+
+            var module = new ConfigurationModule(configuration);
+            var builder = new ContainerBuilder();
+            builder.RegisterModule(module);
+            Container = builder.Build();
+
+            var sample = configuration.GetSection("Sample").Get<SampleSettings>();
+            Console.WriteLine(sample.ItemA);
+            Console.WriteLine(sample.ItemB);
+            Console.WriteLine(sample.ItemC);
+
             Console.WriteLine("\n 処理を開始します");
 
             try
@@ -32,12 +62,7 @@ namespace JsonDataMaker
                     var reader1 = new StreamReader(o.file1Name, Encoding.GetEncoding("shift-jis"));
                     var csv1 = new CsvReader(reader1);
 
-                    var cf = new CsvFetcher();
-                    var jf = new JsonFileWriter();
-
-                    IGWLogic _iGWLogic;
-
-                    _iGWLogic = _logicFactory.CreateLogic(o.apiNo, reqOrRes, cf, jf);
+                    IGWLogic _iGWLogic = _iGWLogic = Container.Resolve<LogicFactory>().CreateLogic(o.apiNo, reqOrRes);
 
                     // listファイルがある場合
                     if (o.file2Name != null)
