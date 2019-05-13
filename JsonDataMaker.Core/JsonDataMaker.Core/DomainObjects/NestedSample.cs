@@ -4,7 +4,7 @@ using System.Text;
 
 namespace JsonDataMaker.Core.DomainObjects
 {
-    public class ParentSampleObject
+    public class ParentSample
     {
         public string ParentA { get; set; }
 
@@ -16,10 +16,10 @@ namespace JsonDataMaker.Core.DomainObjects
 
         public string ParentE { get; set; }
 
-        public IEnumerable<ChildSampleObject> Children { get; set; }
+        public IEnumerable<ChildSample> Children { get; set; }
     }
 
-    public class ChildSampleObject
+    public class ChildSample
     {
         public string ChildA { get; set; }
 

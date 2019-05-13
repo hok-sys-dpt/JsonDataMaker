@@ -3,23 +3,25 @@ using System.Collections.Generic;
 using System.Text;
 using CsvHelper.Configuration;
 using JsonDataMaker.Core.DomainObjects;
+using JsonDataMaker.Core.DomainObjects.Csv;
 
 namespace JsonDataMaker.Core.Maps
 {
-    public class ParentSampleMap : ClassMap<ParentSampleObject>
+    public class ParentSampleMap : ClassMap<Root<ParentSample>>
     {
         public ParentSampleMap()
         {
-            Map(x => x.ParentA).Index(0).Name("ParentA");
-            Map(x => x.ParentB).Index(1).Name("ParentB");
-            Map(x => x.ParentC).Index(2).Name("ParentC");
-            Map(x => x.ParentD).Index(3).Name("ParentD");
-            Map(x => x.ParentE).Index(4).Name("ParentE");
-            Map(x => x.Children).Ignore();
+            Map(x => x.FileId).Index(0).Name("FileId");
+            Map(x => x.Data.ParentA).Index(0).Name("ParentA");
+            Map(x => x.Data.ParentB).Index(1).Name("ParentB");
+            Map(x => x.Data.ParentC).Index(2).Name("ParentC");
+            Map(x => x.Data.ParentD).Index(3).Name("ParentD");
+            Map(x => x.Data.ParentE).Index(4).Name("ParentE");
+            Map(x => x.Data.Children).Ignore();
         }
     }
 
-    public class ChildSampleMap : ClassMap<ChildSampleObject>
+    public class ChildSampleMap : ClassMap<ChildSample>
     {
         public ChildSampleMap()
         {

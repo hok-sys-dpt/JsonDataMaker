@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using JsonDataMaker.Core.DomainObjects;
+using JsonDataMaker.Core.DomainObjects.Csv;
 using JsonDataMaker.Core.Parsers;
 using Xunit;
 
@@ -16,10 +17,10 @@ namespace JsonDataMaker.Core.Tests.Parsers
             var target = new NestedSampleCsvPaeser();
 
             var parentCsv = new StringBuilder();
-            parentCsv.AppendLine("ParentA,ParentB,ParentC,ParentD,ParentE");
-            parentCsv.AppendLine("A1,B1,C1,D1,E1");
-            parentCsv.AppendLine("A2,B2,C2,D2,E2");
-            parentCsv.AppendLine("A3,B3,C3,D3,E3");
+            parentCsv.AppendLine("FileId,ParentA,ParentB,ParentC,ParentD,ParentE");
+            parentCsv.AppendLine("1,A1,B1,C1,D1,E1");
+            parentCsv.AppendLine("2,A2,B2,C2,D2,E2");
+            parentCsv.AppendLine("3,A3,B3,C3,D3,E3");
 
             var parentStream = new MemoryStream(Encoding.UTF8.GetBytes(parentCsv.ToString()));
 
@@ -35,21 +36,21 @@ namespace JsonDataMaker.Core.Tests.Parsers
 
             var actual = target.Parse(parentStream, childStream);
 
-            var expected = new List<ParentSampleObject>()
+            var expected = new List<Root<ParentSample>>()
             {
-                new ParentSampleObject(){ ParentA = "A1", ParentB = "B1", ParentC = "C1", ParentD = "D1", ParentE = "E1" },
-                new ParentSampleObject(){ ParentA = "A2", ParentB = "B2", ParentC = "C2", ParentD = "D2", ParentE = "E2" },
-                new ParentSampleObject(){ ParentA = "A3", ParentB = "B3", ParentC = "C3", ParentD = "D3", ParentE = "E3" },
+                new Root<ParentSample>(){ FileId = 1, Data =  new ParentSample(){ ParentA = "A1", ParentB = "B1", ParentC = "C1", ParentD = "D1", ParentE = "E1" }},
+                new Root<ParentSample>(){ FileId = 2, Data =  new ParentSample(){ ParentA = "A2", ParentB = "B2", ParentC = "C2", ParentD = "D2", ParentE = "E2" }},
+                new Root<ParentSample>(){ FileId = 3, Data =  new ParentSample(){ ParentA = "A3", ParentB = "B3", ParentC = "C3", ParentD = "D3", ParentE = "E3" }},
             };
             foreach (var item in expected)
             {
-                item.Children = new List<ChildSampleObject>()
+                item.Data.Children = new List<ChildSample>()
                 {
-                    new ChildSampleObject(){ ChildA = "c_A1", ChildB = "c_B1", ChildC = "c_C1", ChildD = "c_D1", ChildE = "c_E1" },
-                    new ChildSampleObject(){ ChildA = "c_A2", ChildB = "c_B2", ChildC = "c_C2", ChildD = "c_D2", ChildE = "c_E2" },
-                    new ChildSampleObject(){ ChildA = "c_A3", ChildB = "c_B3", ChildC = "c_C3", ChildD = "c_D3", ChildE = "c_E3" },
-                    new ChildSampleObject(){ ChildA = "c_A4", ChildB = "c_B4", ChildC = "c_C4", ChildD = "c_D4", ChildE = "c_E4" },
-                    new ChildSampleObject(){ ChildA = "c_A5", ChildB = "c_B5", ChildC = "c_C5", ChildD = "c_D5", ChildE = "c_E5" },
+                    new ChildSample(){ ChildA = "c_A1", ChildB = "c_B1", ChildC = "c_C1", ChildD = "c_D1", ChildE = "c_E1" },
+                    new ChildSample(){ ChildA = "c_A2", ChildB = "c_B2", ChildC = "c_C2", ChildD = "c_D2", ChildE = "c_E2" },
+                    new ChildSample(){ ChildA = "c_A3", ChildB = "c_B3", ChildC = "c_C3", ChildD = "c_D3", ChildE = "c_E3" },
+                    new ChildSample(){ ChildA = "c_A4", ChildB = "c_B4", ChildC = "c_C4", ChildD = "c_D4", ChildE = "c_E4" },
+                    new ChildSample(){ ChildA = "c_A5", ChildB = "c_B5", ChildC = "c_C5", ChildD = "c_D5", ChildE = "c_E5" },
                 };
             }
             actual.Is(expected, new JsonComparer());
