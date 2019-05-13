@@ -16,7 +16,6 @@ namespace JsonDataMaker.Core.Parsers
             return OnParse(stream);
         }
 
-
         public IEnumerable<T> Parse(params Stream[] streams)
         {
             return OnParse(streams);

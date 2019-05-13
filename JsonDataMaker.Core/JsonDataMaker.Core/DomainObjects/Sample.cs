@@ -4,7 +4,7 @@ using System.Text;
 
 namespace JsonDataMaker.Core.DomainObjects
 {
-    public class SampleObject
+    public class Sample
     {
         public string FieldA { get; set; }
 
