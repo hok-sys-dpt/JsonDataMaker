@@ -57,7 +57,7 @@ namespace JsonDataMaker.Core.Tests.Parsers
                 },
                 new Root<RequestMessageData>()
                 {
-                    FileId = 1010,
+                    FileId = 0010,
                     Data = new RequestMessageData()
                     {
                         BizIbKeiyakushaJohoShokai = new BizIbKeiyakushaJohoShokai()
