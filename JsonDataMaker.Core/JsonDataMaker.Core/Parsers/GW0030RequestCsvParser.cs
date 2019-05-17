@@ -4,7 +4,7 @@ using JsonDataMaker.Core.Maps;
 
 namespace JsonDataMaker.Core.Parsers
 {
-    public class GW0030RequestCsvParser : CsvParser<Root<RequestMessageData>, GW0030RequestMap>
+    public class GW0030RequestCsvParser : CsvParser<RequestMessageData, GW0030RequestMap>
     {
     }
 }

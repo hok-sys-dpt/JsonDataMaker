@@ -41,15 +41,12 @@ namespace JsonDataMaker.Core.Maps
             // 確認実行区分
             Map(x => x.Teikiyokinshiharai.IbTeikiShohinKaiyakuYokyu.kakuninJikkoKubun)
                 .Index(10).Name("kakuninJikkoKubun");
-            // 照会代行照会表示
-            Map(x => x.Teikiyokinshiharai.IbTeikiShohinKaiyakuYokyu.shokaiDaikoShokaiHyoji)
-                .Index(11).Name("shokaiDaikoShokaiHyoji");
             // 支払日
             Map(x => x.Teikiyokinshiharai.IbTeikiShohinKaiyakuYokyu.shiharaibi)
-                .Index(12).Name("shiharaibi");
+                .Index(11).Name("shiharaibi");
             // 契約者ID
             Map(x => x.Teikiyokinshiharai.KensaKomoku.keiyakushaId)
-                .Index(13).Name("keiyakushaId");
+                .Index(12).Name("keiyakushaId");
         }
     }
 }
