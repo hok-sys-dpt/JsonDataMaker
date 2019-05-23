@@ -1,12 +1,12 @@
-﻿using BankVision.WebAPI.Models.GW0019.Response;
+﻿using BankVision.WebAPI.Models.GW0020.Response;
 using CsvHelper.Configuration;
 using JsonDataMaker.Core.DomainObjects.Csv;
 
 namespace JsonDataMaker.Core.Maps
 {
-    public class GW0019ResponseMap : ClassMap<Root<ResponseMessageData>>
+    public class GW0020ResponseMap : ClassMap<Root<ResponseMessageData>>
     {
-        public GW0019ResponseMap()
+        public GW0020ResponseMap()
         {
             Map(x => x.FileId).Index(0).Name("FileId");
             Map(x => x.Data.HurikomisakiKozaShokai.shoribi).Index(1).Name("shoribi");
